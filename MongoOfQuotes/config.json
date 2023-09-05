@@ -1,6 +1,6 @@
 {
     "name": "Mongo of Quotes",
-    "prefix": "!",
+    "prefix": "?",
     "version": "1.0a",
     "token": "",
     "permissions": "None",

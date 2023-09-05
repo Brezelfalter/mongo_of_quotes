@@ -13,8 +13,9 @@ import os
 import platform
 import random
 import sys
-
 import discord
+
+from dotenv import load_dotenv
 from discord.ext import commands, tasks
 from discord.ext.commands import Bot, Context
 
@@ -264,7 +265,7 @@ async def load_cogs() -> None:
                 exception = f"{type(e).__name__}: {e}"
                 bot.logger.error(f"Failed to load extension {extension}\n{exception}")
 
-
+load_dotenv()
 
 asyncio.run(load_cogs())
-bot.run(config["token"])
+bot.run(os.getenv("TOKEN"))

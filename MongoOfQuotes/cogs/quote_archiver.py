@@ -64,7 +64,7 @@ class QuoteArchiver(commands.Cog):
     async def on_message(self, msg):
         # check if message was send in one of the to be archived channels
         check = await self.check_archive(msg)
-        if not check: return
+        if check == False: return
 
         # setup mongodb
         uri = config["mongodb_uri"]
@@ -167,9 +167,14 @@ class QuoteArchiver(commands.Cog):
         # if no, stop and ignore the message
         for category in config["quote_archiver"]["archive_categories"]:
             archive_category = self.bot.get_channel(category)
+            check = False
 
-            if msg.channel not in archive_category.channels: return False
-            else: return True
+            for channel in archive_category.channels:
+                if str(msg.channel.name) == str(channel.name):
+                    check = True
+                    break
+
+        return check
     
 
     async def archive_messages_in_category(self, category_id):

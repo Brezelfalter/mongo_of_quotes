@@ -95,9 +95,22 @@ class QuoteManager(commands.Cog):
         # edit db (add new formatted quote?)
         formatted_quote = await self.edit_database(review_message_id, ctx.message.author, formatted_quote)
 
-        # send edited version to channel
-        channel = discord.utils.get(ctx.guild.channels, name=channel_name)
-        await channel.send(formatted_quote)
+        # get category from guild and id
+        guild = ctx.guild
+        category = discord.utils.get(guild.channels, id=config["quote_archiver"]["primary_category_id"])
+        
+        # find channel with fitting name in category
+        for channel in category.channels:
+            if isinstance(channel, discord.TextChannel) and channel.name == channel_name:
+                send_channel = channel
+
+        # check if channel was found, if not return and message
+        if not send_channel: 
+            await ctx.send("Please use an existing channel name or check your spelling.")
+            return
+        
+        # send message to the found channel
+        await send_channel.send(formatted_quote)
 
         # delete message sent by user 
         await ctx.message.delete()

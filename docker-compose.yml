@@ -19,5 +19,5 @@ services:
     container_name: discord_bot
     restart: always
     build:
-      context: ./MongoOfQuotesV1a
+      context: ./MongoOfQuotes
       dockerfile: Dockerfile

@@ -1,0 +1,57 @@
+{
+    "name": "Mongo of Quotes",
+    "prefix": "!",
+    "version": "1.0a",
+    "token": "",
+    "permissions": "None",
+    "application_id": "None",
+    "sync_commands_globally": false,
+    "owners": [
+        660883913995976705
+    ],
+    "system": {
+        "command_blacklist": [
+            "System"
+        ],
+        "command_help_blacklist": [
+            "ip", 
+            "sh"
+        ]
+    },
+    "quote_archiver": {
+        "archive_categories": [
+            1046785005541675188,
+            1146558297869127719
+        ],
+        "primary_category_id": 1146558297869127719
+    },
+    "quote_manager": {
+        "quote_channel_id": 1146582449896312912,
+        "quote_duplicate_channel_id": 0,
+        "quote_review_channel_id": 1146073994924146799,
+        "quote_reviewer_role_id": 1049981347420176384,
+        "reminder_channel_id": 1146074273828581386,
+        "sorting_channels": {
+            "high_containment": 1073173183756242964,
+            "low_containment": 1100434165129805824,
+            "no_context": 1081665821929132134, 
+            "not_funny": 1081666490111111240
+        },
+        "required_votes": 4
+    },
+    "quote_of_the_day": {
+        "blocked_collections": [
+            "quote_manager"
+        ],
+        "channel_id": 1072915697048498266
+    },
+    "quote_stats": {
+        "blocked_collections": [
+            "quote_manager", 
+            "test",
+            "MoQ"
+        ],
+        "channel_id": 1073333091562700840
+    },
+    "mongodb_uri": "mongodb://mongoadmin:secret@192.168.178.45:27888/?authMechanism=DEFAULT"
+}

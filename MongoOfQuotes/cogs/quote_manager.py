@@ -61,7 +61,7 @@ class QuoteManager(commands.Cog):
             self.bot.logger.info(f"Recieved quote by: {msg.author.name} (ID: {msg.author.id}) RAW: '{msg.content}'")
         
             # delete the original message
-            await msg.delete()
+            # await msg.delete() CURRENT-DEV
 
             # logging 
             self.bot.logger.info(f"Added review message for quote in {msg.channel.name} (ID: {msg.channel.id}) by {msg.author.name} (ID: {msg.author.id})")
@@ -561,7 +561,10 @@ class QuoteManager(commands.Cog):
         # setup discord review message variables 
         review_channel = self.bot.get_channel(review_channel_id)
         review_message = await review_channel.fetch_message(review_message_id)
-        
+
+        # setup discord quote message variables 
+        quote_channel = self.bot.get_channel(config["quote_manager"]["quote_channel_id"])
+
         # edit review message
         review_message_content = review_message.content
         review_message_content = review_message_content.replace("voting", "sorted")
@@ -583,8 +586,11 @@ class QuoteManager(commands.Cog):
 
         # define query to search for
         query = {
-            "quote": quote
+            "review_message_id": review_message_id
         }
+
+        # get result for query
+        res = coll.find_one(query)
 
         # define the update for quote in database
         update_doc = {
@@ -597,12 +603,21 @@ class QuoteManager(commands.Cog):
         # push update to database
         coll.update_one(query, update_doc)
 
+        # get the original message from the user entered quotes channel
+        original_message = await quote_channel.fetch_message(res["message_id"])
+
+        # delete the message
+        await original_message.delete()
+
 
     async def set_db_voted(self, review_channel_id:int, review_message_id:int, quote):
         # setup discord review message variables 
         review_channel = self.bot.get_channel(review_channel_id)
         review_message = await review_channel.fetch_message(review_message_id)
         
+        # setup discord quote message variables 
+        quote_channel = self.bot.get_channel(config["quote_manager"]["quote_channel_id"])
+
         # edit review message
         review_message_content = review_message.content
         review_message_content = review_message_content.replace("voting", "voted")
@@ -627,6 +642,9 @@ class QuoteManager(commands.Cog):
             "review_message_id": review_message_id
         }
 
+        # get result for query
+        res = coll.find_one(query)
+
         # define the update for quote in database
         update_doc = {
             "$set": {
@@ -636,6 +654,12 @@ class QuoteManager(commands.Cog):
 
         # push update to database
         coll.update_one(query, update_doc)
+
+        # get the original message from the user entered quotes channel
+        original_message = await quote_channel.fetch_message(res["message_id"])
+
+        # delete the message
+        await original_message.delete()
 
 
     async def send_reminder(self, embed=None):

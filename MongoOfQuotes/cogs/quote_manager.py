@@ -59,9 +59,6 @@ class QuoteManager(commands.Cog):
 
             # log the quote
             self.bot.logger.info(f"Recieved quote by: {msg.author.name} (ID: {msg.author.id}) RAW: '{msg.content}'")
-        
-            # delete the original message
-            # await msg.delete() CURRENT-DEV
 
             # logging 
             self.bot.logger.info(f"Added review message for quote in {msg.channel.name} (ID: {msg.channel.id}) by {msg.author.name} (ID: {msg.author.id})")

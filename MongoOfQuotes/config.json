@@ -1,7 +1,7 @@
 {
     "name": "Mongo of Quotes",
     "prefix": "!",
-    "version": "1.0a",
+    "version": "1.1dev24-05-28",
     "token": "",
     "permissions": "None",
     "application_id": "None",
@@ -51,7 +51,8 @@
             "test",
             "MoQ"
         ],
-        "channel_id": 1073333091562700840
+        "channel_id": 1073333091562700840,
+        "max_channels": 30
     },
-    "mongodb_uri": "mongodb://mongoadmin:secret@192.168.178.45:27888/?authMechanism=DEFAULT"
+    "mongodb_uri": "mongodb://mongoadmin:secret@mongo_db_:27017/?authMechanism=DEFAULT"
 }

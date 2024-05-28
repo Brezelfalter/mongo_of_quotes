@@ -1,5 +1,0 @@
-discord
-discord-ext-bot
-arrow
-pymongo
-python-dotenv

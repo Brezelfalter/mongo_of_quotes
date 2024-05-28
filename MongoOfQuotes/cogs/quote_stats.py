@@ -105,8 +105,15 @@ class QuoteStats(commands.Cog):
         # create the start of the dump 
         dump = f"{pad('Channel', 20)}{pad('Zitate (%)', 12)}Zitate\n"
 
+        # specify counter for top x channels to be displayed
+        iterations = 0
+
         # iterate over all keys and their values in dict
         for k, v in quotes_per_channel.items():
+            # check if the current iteration is still below the maximum that is set to be displayed in the config file, if not, raise iterations by one
+            if iterations >= int(config["quote_stats"]["max_channels"]): continue
+            else: iterations += 1
+
             # calculate the percentage this channel has on the whole amount of quotes 
             percentage = (100 / total_quotes) * v
 
@@ -117,14 +124,14 @@ class QuoteStats(commands.Cog):
 
             # add the newly created dump to the old one
             dump = f"{dump}{key}{percentage}{value}\n"
-
+        
         # get timestamp in german time
         timestamp = arrow.now()
         timestamp_ger = timestamp.to("Europe/Berlin")
         timestamp_ger = timestamp_ger.format("DD.MM.YYYY HH:mm:ss")
 
         # add the end of the dump to the existing one
-        dump = f"Zitatanteile (Stand: {timestamp_ger})\n```{dump}\n{pad('Total', 20)}{pad('100%', 12)}{total_quotes}```"
+        dump = f"Zitatanteile Top {iterations} (Stand: {timestamp_ger})\n```{dump}\n{pad('Total', 20)}{pad('100%', 12)}{total_quotes}```"
         
         return dump
 

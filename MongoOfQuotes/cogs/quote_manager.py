@@ -520,30 +520,30 @@ class QuoteManager(commands.Cog):
 
         # if "5" send review message was sorted
         if emoji in ["1️⃣", "2️⃣", "3️⃣", "4️⃣"]: 
-            remind_embed = discord.Embed(
-                title="Review message reminder",
-                description=f"Review message has reached enough votes and has been sorted automatically.",
-                color=discord.Color.green()
-            )
-            remind_embed.set_footer(text=f"review_msg_id: {payload.message_id}")
+            # remind_embed = discord.Embed(
+            #     title="Review message reminder",
+            #     description=f"Review message has reached enough votes and has been sorted automatically.",
+            #     color=discord.Color.green()
+            # )
+            # remind_embed.set_footer(text=f"review_msg_id: {payload.message_id}")
 
-            # send reminder with given embed
-            await self.send_reminder(remind_embed)
+            # # send reminder with given embed
+            # await self.send_reminder(remind_embed)
             
             # logging 
             self.bot.logger.info(f"Reaction event in {channel.name} (ID: {channel.id}) [Quote was sorted.]")
         # if "5" send review message to be sorted
         elif emoji == "5️⃣": 
-            remind_embed = discord.Embed(
-                title="Review message reminder",
-                description=f"Review message has reached enough votes and can now be sorted.",
-                color=discord.Color.red()
-            )
-            remind_embed.add_field(name="Quote:", value=f"```{result['quote']}```")
-            remind_embed.set_footer(text=f"review_msg_id: {payload.message_id}")
+            # remind_embed = discord.Embed(
+            #     title="Review message reminder",
+            #     description=f"Review message has reached enough votes and can now be sorted.",
+            #     color=discord.Color.red()
+            # )
+            # remind_embed.add_field(name="Quote:", value=f"```{result['quote']}```")
+            # remind_embed.set_footer(text=f"review_msg_id: {payload.message_id}")
 
-            # send reminder with given embed
-            await self.send_reminder(remind_embed)
+            # # send reminder with given embed
+            # await self.send_reminder(remind_embed)
 
             # logging 
             self.bot.logger.info(f"Reaction event in {channel.name} (ID: {channel.id}) [Quote can now be sorted.]")
@@ -668,13 +668,13 @@ class QuoteManager(commands.Cog):
     async def send_reminder_votes(self, emoji, votes):
         reminder_channel = self.bot.get_channel(config["quote_manager"]["reminder_channel_id"])
 
-        remind_embed = discord.Embed(
-            title="Review message reminder",
-            description=f"Currently {votes}/{config['quote_manager']['required_votes']} votes for voting option {emoji}.",
-            color=discord.Color.blue()
-        )
+        # remind_embed = discord.Embed(
+        #     title="Review message reminder",
+        #     description=f"Currently {votes}/{config['quote_manager']['required_votes']} votes for voting option {emoji}.",
+        #     color=discord.Color.blue()
+        # )
 
-        await reminder_channel.send(embed=remind_embed, silent=True)
+        # await reminder_channel.send(embed=remind_embed, silent=True)
         
 
     # FUNCTIONS USED IN COMMAND "edit"

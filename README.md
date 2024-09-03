@@ -5,4 +5,4 @@ Development version is https://github.com/Brezelfalter/mongo_of_quotes_developme
 
 &nbsp;
 --- 
-Currently on v1.1dev24-06-02 from the development repository. (as of 2024-06-02)
+Currently on v1.1dev24-09-03 from the development repository. (as of 2024-09-03)

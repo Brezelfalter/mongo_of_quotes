@@ -1,7 +1,7 @@
 {
     "name": "Mongo of Quotes",
     "prefix": "!",
-    "version": "1.1dev24-06-02",
+    "version": "1.1dev24-09-03",
     "token": "",
     "permissions": "None",
     "application_id": "None",
@@ -21,9 +21,10 @@
     "quote_archiver": {
         "archive_categories": [
             1046785005541675188,
-            1146558297869127719
+            1146558297869127719,
+            1280566526440771687
         ],
-        "primary_category_id": 1146558297869127719
+        "primary_category_id": 1280566526440771687
     },
     "quote_manager": {
         "quote_channel_id": 1146582449896312912,

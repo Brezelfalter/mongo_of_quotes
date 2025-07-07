@@ -4,19 +4,19 @@ name: mongo_of_quotes
 services:
   mongo_db:
     image: mongo
-    container_name: mongo_db_
+    container_name: mongo_db
     environment:
-      # todo: change this to safer credentials
+      # change these credentials
       MONGO_INITDB_ROOT_USERNAME: mongoadmin 
       MONGO_INITDB_ROOT_PASSWORD: secret
     restart: always
     volumes:
-      - /home/local_docker_volumes/mongo_of_quotes/mongodb:/data/db # todo: change path to the left to propper location
+      - ./mongodb:/data/db
     ports:
       - "27888:27017"
 
   discord_bot:
-    container_name: discord_bot_
+    container_name: discord_bot
     restart: always
     build:
       context: ./MongoOfQuotes

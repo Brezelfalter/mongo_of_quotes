@@ -695,7 +695,6 @@ class QuoteManager(commands.Cog):
         # define the update for quote in database
         update_doc = {
             "$set": {
-                "quote": new_quote,
                 "formatted_quote": new_quote,
                 "status": "sorted"
             }

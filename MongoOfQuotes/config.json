@@ -1,13 +1,13 @@
 {
     "name": "Mongo of Quotes",
     "prefix": "!",
-    "version": "1.1dev24-09-03",
+    "version": "1.1dev25-07-07",
     "token": "",
     "permissions": "None",
     "application_id": "None",
     "sync_commands_globally": false,
     "owners": [
-        660883913995976705
+        
     ],
     "system": {
         "command_blacklist": [
@@ -20,31 +20,29 @@
     },
     "quote_archiver": {
         "archive_categories": [
-            1046785005541675188,
-            1146558297869127719,
-            1280566526440771687
+            0
         ],
-        "primary_category_id": 1280566526440771687
+        "primary_category_id": 0
     },
     "quote_manager": {
-        "quote_channel_id": 1146582449896312912,
+        "quote_channel_id": 0,
         "quote_duplicate_channel_id": 0,
-        "quote_review_channel_id": 1146073994924146799,
-        "quote_reviewer_role_id": 1049981347420176384,
-        "reminder_channel_id": 1146074273828581386,
+        "quote_review_channel_id": 0,
+        "quote_reviewer_role_id": 0,
+        "reminder_channel_id": 0,
         "sorting_channels": {
-            "high_containment": 1073173183756242964,
-            "low_containment": 1100434165129805824,
-            "no_context": 1081665821929132134, 
-            "not_funny": 1081666490111111240
+            "high_containment": 0,
+            "low_containment": 0,
+            "no_context": 0, 
+            "not_funny": 0
         },
-        "required_votes": 4
+        "required_votes": 2
     },
     "quote_of_the_day": {
         "blocked_collections": [
             "quote_manager"
         ],
-        "channel_id": 1072915697048498266
+        "channel_id": 0
     },
     "quote_stats": {
         "blocked_collections": [
@@ -52,8 +50,8 @@
             "test",
             "MoQ"
         ],
-        "channel_id": 1073333091562700840,
+        "channel_id": 0,
         "max_channels": 30
     },
-    "mongodb_uri": "mongodb://mongoadmin:secret@mongo_db_:27017/?authMechanism=DEFAULT"
+    "mongodb_uri": "mongodb://mongoadmin:secret@mongo_db:27017/?authMechanism=DEFAULT"
 }

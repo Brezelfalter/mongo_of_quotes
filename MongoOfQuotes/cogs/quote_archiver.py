@@ -24,42 +24,17 @@ logger = logging.getLogger("discord_bot")
 logger.setLevel(logging.INFO)
 
 
+'''
+class QuoteArchiver for commands.Cog (standard cog class)
+'''
 class QuoteArchiver(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    @commands.is_owner()
-    @commands.command(brief="Archives a complete category with all its channels. \n\nUsage: `archive_category [category id]` \n\n'category id': the category id that should be archived.")
-    async def archive_category(self, ctx, category_id:int):
-        # check if category is on the list of archive categories
-        # if yes, continue
-        # if no, stop and give back an error
-        if category_id not in config["quote_archiver"]["archive_categories"]: 
-            await ctx.send("The category you are trying to archive is not on the list of categories to archive, please try again with a valid id.", delete_after=10)
-            return
-        
-        # archive messages in channels in category
-        await self.archive_messages_in_category(category_id)
-
-
-    @commands.is_owner()
-    @commands.command(brief="Archives a channel. \n\nUsage: `archive_channel [channel id]` \n\n'channel id': the channel id that should be archived.")
-    async def archive_channel(self, ctx, channel_id:int):
-        # setup discord variables 
-        channel = self.bot.get_channel(channel_id)
-        category_id = channel.category_id
-        
-        # check if category is on the list of archive categories
-        # if yes, continue
-        # if no, stop and give back an error
-        if category_id not in config["quote_archiver"]["archive_categories"]: 
-            await ctx.send("The channel you are trying to archive is not in a category which is on the list of categories to archive, please try again with a valid id.", delete_after=10)
-            return
-        
-        # archive messages in channel
-        await self.archive_messages_in_channel(channel_id)
-
-
+    
+    ''' 
+    standard discord events (commands) 
+    '''
     @commands.Cog.listener()
     async def on_message(self, msg):
         # check if message was send in one of the to be archived channels
@@ -138,7 +113,7 @@ class QuoteArchiver(commands.Cog):
         channel = self.bot.get_channel(payload.channel_id)
 
         # check if channel id is in to be archived categories
-        if channel.guild.id not in config["quote_archiver"]["archive_categories"]: return
+        if channel.category_id not in config["quote_archiver"]["archive_categories"]: return
  
         # setup mongodb
         uri = config["mongodb_uri"]
@@ -161,6 +136,41 @@ class QuoteArchiver(commands.Cog):
         self.bot.logger.info(f"Deleted quote. (ID: {payload.message_id})")
 
 
+    @commands.is_owner()
+    @commands.command(brief="Archives a complete category with all its channels. \n\nUsage: `archive_category [category id]` \n\n'category id': the category id that should be archived.")
+    async def archive_category(self, ctx, category_id:int):
+        # check if category is on the list of archive categories
+        # if yes, continue
+        # if no, stop and give back an error
+        if category_id not in config["quote_archiver"]["archive_categories"]: 
+            await ctx.send("The category you are trying to archive is not on the list of categories to archive, please try again with a valid id.", delete_after=10)
+            return
+        
+        # archive messages in channels in category
+        await self.archive_messages_in_category(category_id)
+
+
+    @commands.is_owner()
+    @commands.command(brief="Archives a channel. \n\nUsage: `archive_channel [channel id]` \n\n'channel id': the channel id that should be archived.")
+    async def archive_channel(self, ctx, channel_id:int):
+        # setup discord variables 
+        channel = self.bot.get_channel(channel_id)
+        category_id = channel.category_id
+        
+        # check if category is on the list of archive categories
+        # if yes, continue
+        # if no, stop and give back an error
+        if category_id not in config["quote_archiver"]["archive_categories"]: 
+            await ctx.send("The channel you are trying to archive is not in a category which is on the list of categories to archive, please try again with a valid id.", delete_after=10)
+            return
+        
+        # archive messages in channel
+        await self.archive_messages_in_channel(channel_id)
+
+
+    '''
+    functions used for standard discord events
+    '''
     async def check_archive(self, msg):
         # go through all categories from the config file, check if message channel is part of one of them
         # if yes, continue with the programm
@@ -223,5 +233,6 @@ class QuoteArchiver(commands.Cog):
 
 
 
+# setup function to add cog to bot
 async def setup(bot):
     await bot.add_cog(QuoteArchiver(bot))

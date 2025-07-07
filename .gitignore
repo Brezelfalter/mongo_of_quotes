@@ -1,2 +1,5 @@
 discord.log
 __pycache__/
+.env
+mongodb/
+config.json

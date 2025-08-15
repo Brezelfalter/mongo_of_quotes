@@ -4,7 +4,7 @@ A discord bot designed to sort and save quotes using mongodb, containerized with
 
 &nbsp;
 ## Setup
-1. Install docker and docker compose.
+1. Ensure docker and docker compose are installed on your system.
 
 2. Clone the [repository](https://github.com/Brezelfalter/mongo_of_quotes).
 

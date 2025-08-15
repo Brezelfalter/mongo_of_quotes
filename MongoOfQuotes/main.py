@@ -5,15 +5,7 @@ Description:
 
 Version: 5.5.0
 """
-
-import asyncio
-import json
-import logging
-import os
-import platform
-import random
-import sys
-import discord
+import asyncio, json, logging, os, platform, random, sys, discord
 
 from dotenv import load_dotenv
 from discord.ext import commands, tasks
